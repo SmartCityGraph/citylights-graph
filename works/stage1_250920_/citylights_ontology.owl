@@ -13,279 +13,325 @@
 #    Object Properties
 #################################################################
 
-###  http://www.w3id.org/citylights-graphhasConstantTimetable
-cl:hasConstantTimetable rdf:type owl:ObjectProperty ;
-                        rdfs:domain cl:GeneralTimetable ;
-                        rdfs:range cl:ConstantTimetable .
+###  http://www.w3id.org/citylights-graph#hasConstantTimetable
+:hasConstantTimetable rdf:type owl:ObjectProperty ;
+                      rdfs:domain :GeneralTimetable ;
+                      rdfs:range :ConstantTimetable ;
+                      rdfs:label "постоянное расписание" .
 
 
-###  http://www.w3id.org/citylights-graphhasGeneralTimetable
-cl:hasGeneralTimetable rdf:type owl:ObjectProperty ;
-                       rdfs:domain cl:City ;
-                       rdfs:range cl:GeneralTimetable .
+###  http://www.w3id.org/citylights-graph#hasGeneralTimetable
+:hasGeneralTimetable rdf:type owl:ObjectProperty ;
+                     rdfs:domain :City ;
+                     rdfs:range :GeneralTimetable ;
+                     rdfs:label "главное расписание" .
 
 
-###  http://www.w3id.org/citylights-graphhasGeometry
-cl:hasGeometry rdf:type owl:ObjectProperty ;
-               rdfs:range cl:Geometry .
+###  http://www.w3id.org/citylights-graph#hasGeometry
+:hasGeometry rdf:type owl:ObjectProperty ;
+             rdfs:range :Geometry ;
+             rdfs:label "геометрия" .
 
 
-###  http://www.w3id.org/citylights-graphhasLighting
-cl:hasLighting rdf:type owl:ObjectProperty ;
-               rdfs:domain cl:Road ;
-               rdfs:range cl:Lighting .
+###  http://www.w3id.org/citylights-graph#hasLighting
+:hasLighting rdf:type owl:ObjectProperty ;
+             rdfs:domain :Road ;
+             rdfs:range :Lighting ;
+             rdfs:label "освещение" .
 
 
-###  http://www.w3id.org/citylights-graphhasRoad
-cl:hasRoad rdf:type owl:ObjectProperty ;
-           rdfs:domain cl:City ;
-           rdfs:range cl:Road .
+###  http://www.w3id.org/citylights-graph#hasRoad
+:hasRoad rdf:type owl:ObjectProperty ;
+         rdfs:domain :City ;
+         rdfs:range :Road ;
+         rdfs:label "дорога" .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://www.w3id.org/citylights-graphhasBandwidth
-cl:hasBandwidth rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf cl:hasRoadsProperty ;
-                rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasBandwidth
+:hasBandwidth rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :hasRoadsProperty ;
+              rdfs:range xsd:integer ;
+              rdfs:label "пропускная способность" .
 
 
-###  http://www.w3id.org/citylights-graphhasDay
-cl:hasDay rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf cl:hasTimetableProperty .
+###  http://www.w3id.org/citylights-graph#hasDayEnd
+:hasDayEnd rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf :hasTimetableProperty ;
+           rdfs:label "день окончания" .
 
 
-###  http://www.w3id.org/citylights-graphhasDistanceBetween
-cl:hasDistanceBetween rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf cl:hasLightingProperty ;
-                      rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasDayStart
+:hasDayStart rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf :hasTimetableProperty ;
+             rdfs:label "день начала" .
 
 
-###  http://www.w3id.org/citylights-graphhasLightingProperty
-cl:hasLightingProperty rdf:type owl:DatatypeProperty ;
-                       rdfs:domain cl:Lighting .
+###  http://www.w3id.org/citylights-graph#hasDistanceBetween
+:hasDistanceBetween rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf :hasLightingProperty ;
+                    rdfs:range xsd:integer ;
+                    rdfs:label "расстояние между" .
 
 
-###  http://www.w3id.org/citylights-graphhasLinesCount
-cl:hasLinesCount rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf cl:hasRoadsProperty ;
-                 rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasLightingProperty
+:hasLightingProperty rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Lighting ;
+                     rdfs:label "атрибут освещения" .
 
 
-###  http://www.w3id.org/citylights-graphhasMinimalIllumination
-cl:hasMinimalIllumination rdf:type owl:DatatypeProperty ;
-                          rdfs:subPropertyOf cl:hasRoadsProperty ;
-                          rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasLinesCount
+:hasLinesCount rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf :hasRoadsProperty ;
+               rdfs:range xsd:integer ;
+               rdfs:label "количество полос движения" .
 
 
-###  http://www.w3id.org/citylights-graphhasPower
-cl:hasPower rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf cl:hasLightingProperty ;
-            rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasMinimalIllumination
+:hasMinimalIllumination rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf :hasRoadsProperty ;
+                        rdfs:range xsd:integer ;
+                        rdfs:label "минимальное освещение" .
 
 
-###  http://www.w3id.org/citylights-graphhasPowerPerKilometer
-cl:hasPowerPerKilometer rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf cl:hasLightingProperty ;
-                        rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasPower
+:hasPower rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf :hasLightingProperty ;
+          rdfs:range xsd:integer ;
+          rdfs:label "мощность" .
 
 
-###  http://www.w3id.org/citylights-graphhasRoadsProperty
-cl:hasRoadsProperty rdf:type owl:DatatypeProperty ;
-                    rdfs:domain cl:Road .
+###  http://www.w3id.org/citylights-graph#hasPowerPerKilometer
+:hasPowerPerKilometer rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf :hasLightingProperty ;
+                      rdfs:range xsd:integer ;
+                      rdfs:label "мощность на 1 км" .
 
 
-###  http://www.w3id.org/citylights-graphhasStandartTravelSpeed
-cl:hasStandartTravelSpeed rdf:type owl:DatatypeProperty ;
-                          rdfs:subPropertyOf cl:hasRoadsProperty ;
-                          rdfs:range xsd:integer .
+###  http://www.w3id.org/citylights-graph#hasRoadsProperty
+:hasRoadsProperty rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Road ;
+                  rdfs:label "атрибут дороги" .
 
 
-###  http://www.w3id.org/citylights-graphhasTimeEnd
-cl:hasTimeEnd rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf cl:hasTimetableProperty .
+###  http://www.w3id.org/citylights-graph#hasStandartTravelSpeed
+:hasStandartTravelSpeed rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf :hasRoadsProperty ;
+                        rdfs:range xsd:integer ;
+                        rdfs:label "расчётная скорость движения" .
 
 
-###  http://www.w3id.org/citylights-graphhasTimeStart
-cl:hasTimeStart rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf cl:hasTimetableProperty .
+###  http://www.w3id.org/citylights-graph#hasTimeEnd
+:hasTimeEnd rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf :hasTimetableProperty ;
+            rdfs:label "время окончания" .
 
 
-###  http://www.w3id.org/citylights-graphhasTimetableProperty
-cl:hasTimetableProperty rdf:type owl:DatatypeProperty ;
-                        rdfs:domain cl:ConstantTimetable .
+###  http://www.w3id.org/citylights-graph#hasTimeStart
+:hasTimeStart rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf :hasTimetableProperty ;
+              rdfs:label "время начала" .
 
 
-###  http://www.w3id.org/citylights-graphisProvidedWithIllumination
-cl:isProvidedWithIllumination rdf:type owl:DatatypeProperty ;
-                              rdfs:subPropertyOf cl:hasRoadsProperty ;
-                              rdfs:range xsd:boolean .
+###  http://www.w3id.org/citylights-graph#hasTimetableProperty
+:hasTimetableProperty rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :ConstantTimetable ;
+                      rdfs:label "атрибут расписания" .
+
+
+###  http://www.w3id.org/citylights-graph#isProvidedWithIllumination
+:isProvidedWithIllumination rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf :hasRoadsProperty ;
+                            rdfs:range xsd:boolean ;
+                            rdfs:label "обеспечена освещением" .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://www.w3id.org/citylights-graphA-class_Road
-cl:A-class_Road rdf:type owl:Class ;
-                rdfs:subClassOf cl:Road .
+###  http://www.w3id.org/citylights-graph#A-class_Road
+:A-class_Road rdf:type owl:Class ;
+              rdfs:subClassOf :Road ;
+              rdfs:label "Дорога городского значения" .
 
 
-###  http://www.w3id.org/citylights-graphA1-ClassRoad
-cl:A1-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:A-class_Road .
+###  http://www.w3id.org/citylights-graph#A1-ClassRoad
+:A1-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :A-class_Road ;
+              rdfs:label "Дорога класса А1" .
 
 
-###  http://www.w3id.org/citylights-graphA2-ClassRoad
-cl:A2-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:A-class_Road .
+###  http://www.w3id.org/citylights-graph#A2-ClassRoad
+:A2-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :A-class_Road ;
+              rdfs:label "Дорога класса А2" .
 
 
-###  http://www.w3id.org/citylights-graphA3-ClassRoad
-cl:A3-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:A-class_Road .
+###  http://www.w3id.org/citylights-graph#A3-ClassRoad
+:A3-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :A-class_Road ;
+              rdfs:label "Дорога класса А3" .
 
 
-###  http://www.w3id.org/citylights-graphA4-ClassRoad
-cl:A4-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:A-class_Road .
+###  http://www.w3id.org/citylights-graph#A4-ClassRoad
+:A4-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :A-class_Road ;
+              rdfs:label "Дорога класса А4" .
 
 
-###  http://www.w3id.org/citylights-graphB-class_Road
-cl:B-class_Road rdf:type owl:Class ;
-                rdfs:subClassOf cl:Road .
+###  http://www.w3id.org/citylights-graph#B-class_Road
+:B-class_Road rdf:type owl:Class ;
+              rdfs:subClassOf :Road ;
+              rdfs:label "Дорога районного значения" .
 
 
-###  http://www.w3id.org/citylights-graphB1-ClassRoad
-cl:B1-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:B-class_Road .
+###  http://www.w3id.org/citylights-graph#B1-ClassRoad
+:B1-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :B-class_Road ;
+              rdfs:label "Дорога класса Б2" .
 
 
-###  http://www.w3id.org/citylights-graphB2-ClassRoad
-cl:B2-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:B-class_Road .
+###  http://www.w3id.org/citylights-graph#B2-ClassRoad
+:B2-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :B-class_Road ;
+              rdfs:label "Дорога класса Б2" .
 
 
-###  http://www.w3id.org/citylights-graphCity
-cl:City rdf:type owl:Class .
+###  http://www.w3id.org/citylights-graph#City
+:City rdf:type owl:Class ;
+      rdfs:label "Город" .
 
 
-###  http://www.w3id.org/citylights-graphConstantTimetable
-cl:ConstantTimetable rdf:type owl:Class ;
-                     rdfs:subClassOf cl:Timetable .
+###  http://www.w3id.org/citylights-graph#ConstantTimetable
+:ConstantTimetable rdf:type owl:Class ;
+                   rdfs:subClassOf :Timetable ;
+                   rdfs:label "Постоянное расписание" .
 
 
-###  http://www.w3id.org/citylights-graphGeneralTimetable
-cl:GeneralTimetable rdf:type owl:Class ;
-                    rdfs:subClassOf cl:Timetable .
+###  http://www.w3id.org/citylights-graph#GeneralTimetable
+:GeneralTimetable rdf:type owl:Class ;
+                  rdfs:subClassOf :Timetable ;
+                  rdfs:label "Главное расписание" .
 
 
-###  http://www.w3id.org/citylights-graphGeometry
-cl:Geometry rdf:type owl:Class .
+###  http://www.w3id.org/citylights-graph#Geometry
+:Geometry rdf:type owl:Class ;
+          rdfs:label "Геометрия" .
 
 
-###  http://www.w3id.org/citylights-graphLEDLamp
-cl:LEDLamp rdf:type owl:Class ;
-           rdfs:subClassOf cl:Lighting .
+###  http://www.w3id.org/citylights-graph#LEDLamp
+:LEDLamp rdf:type owl:Class ;
+         rdfs:subClassOf :Lighting ;
+         rdfs:label "Светодиодня лампа" .
 
 
-###  http://www.w3id.org/citylights-graphLighting
-cl:Lighting rdf:type owl:Class .
+###  http://www.w3id.org/citylights-graph#Lighting
+:Lighting rdf:type owl:Class ;
+          rdfs:label "Элемент освещения" .
 
 
-###  http://www.w3id.org/citylights-graphRoad
-cl:Road rdf:type owl:Class .
+###  http://www.w3id.org/citylights-graph#Road
+:Road rdf:type owl:Class ;
+      rdfs:label "Дорога" .
 
 
-###  http://www.w3id.org/citylights-graphSodiumLamp
-cl:SodiumLamp rdf:type owl:Class ;
-              rdfs:subClassOf cl:Lighting .
+###  http://www.w3id.org/citylights-graph#SodiumLamp
+:SodiumLamp rdf:type owl:Class ;
+            rdfs:subClassOf :Lighting ;
+            rdfs:label "Натриевая лампа" .
 
 
-###  http://www.w3id.org/citylights-graphTimetable
-cl:Timetable rdf:type owl:Class .
+###  http://www.w3id.org/citylights-graph#Timetable
+:Timetable rdf:type owl:Class ;
+           rdfs:label "Расписание" .
 
 
-###  http://www.w3id.org/citylights-graphV-ClassRoad
-cl:V-ClassRoad rdf:type owl:Class ;
-               rdfs:subClassOf cl:Road .
+###  http://www.w3id.org/citylights-graph#V-ClassRoad
+:V-ClassRoad rdf:type owl:Class ;
+             rdfs:subClassOf :Road ;
+             rdfs:label "Дорога местного значения" .
 
 
-###  http://www.w3id.org/citylights-graphV1-ClassRoad
-cl:V1-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:V-ClassRoad .
+###  http://www.w3id.org/citylights-graph#V1-ClassRoad
+:V1-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :V-ClassRoad ;
+              rdfs:label "Дорога класса В1" .
 
 
-###  http://www.w3id.org/citylights-graphV2-ClassRoad
-cl:V2-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:V-ClassRoad .
+###  http://www.w3id.org/citylights-graph#V2-ClassRoad
+:V2-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :V-ClassRoad ;
+              rdfs:label "Дорога класса В2" .
 
 
-###  http://www.w3id.org/citylights-graphV3-ClassRoad
-cl:V3-ClassRoad rdf:type owl:Class ;
-                rdfs:subClassOf cl:V-ClassRoad .
+###  http://www.w3id.org/citylights-graph#V3-ClassRoad
+:V3-ClassRoad rdf:type owl:Class ;
+              rdfs:subClassOf :V-ClassRoad ;
+              rdfs:label "Дорога класса В3" .
 
 
 ###  http://www.w3id.org/citylights-graph#1-30-150-001-9
 <http://www.w3id.org/citylights-graph#1-30-150-001-9> rdf:type owl:Class ;
-                                                      rdfs:subClassOf cl:SodiumLamp .
+                                                      rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-30-250-001-15.5
 <http://www.w3id.org/citylights-graph#1-30-250-001-15.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-30-250-001-16.5
 <http://www.w3id.org/citylights-graph#1-30-250-001-16.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-40-250-001-15.5
 <http://www.w3id.org/citylights-graph#1-40-250-001-15.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-40-250-001-16.5
 <http://www.w3id.org/citylights-graph#1-40-250-001-16.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-40-250-001-18
 <http://www.w3id.org/citylights-graph#1-40-250-001-18> rdf:type owl:Class ;
-                                                       rdfs:subClassOf cl:SodiumLamp .
+                                                       rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-40-250-001-8
 <http://www.w3id.org/citylights-graph#1-40-250-001-8> rdf:type owl:Class ;
-                                                      rdfs:subClassOf cl:SodiumLamp .
+                                                      rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-50-250-001-13.5
 <http://www.w3id.org/citylights-graph#1-50-250-001-13.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#1-50-250-001-16.5
 <http://www.w3id.org/citylights-graph#1-50-250-001-16.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#2-40-250-001-19.5
 <http://www.w3id.org/citylights-graph#2-40-250-001-19.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf cl:SodiumLamp .
+                                                         rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#2-50-150-001-10
 <http://www.w3id.org/citylights-graph#2-50-150-001-10> rdf:type owl:Class ;
-                                                       rdfs:subClassOf cl:SodiumLamp .
+                                                       rdfs:subClassOf :SodiumLamp .
 
 
 ###  http://www.w3id.org/citylights-graph#4-50-400-001-30
 <http://www.w3id.org/citylights-graph#4-50-400-001-30> rdf:type owl:Class ;
-                                                       rdfs:subClassOf cl:SodiumLamp .
+                                                       rdfs:subClassOf :SodiumLamp .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
