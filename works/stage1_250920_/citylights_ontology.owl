@@ -1,10 +1,13 @@
 @prefix : <http://www.w3id.org/citylights-graph#> .
 @prefix cl: <http://www.w3id.org/citylights-graph> .
+@prefix sf: <http://www.opengis.net/ont/sf#> .
+@prefix geo: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 @base <http://www.w3id.org/citylights-graph> .
 
 <http://www.w3id.org/citylights-graph> rdf:type owl:Ontology .
@@ -13,24 +16,39 @@
 #    Object Properties
 #################################################################
 
-###  http://www.w3id.org/citylights-graph#hasConstantTimetable
-:hasConstantTimetable rdf:type owl:ObjectProperty ;
-                      rdfs:domain :GeneralTimetable ;
-                      rdfs:range :ConstantTimetable ;
-                      rdfs:label "постоянное расписание" .
+###  http://www.w3.org/2006/time#hasBeginning
+time:hasBeginning rdf:type owl:ObjectProperty ;
+                  rdfs:label "время начала" .
+
+
+###  http://www.w3.org/2006/time#hasDuration
+time:hasDuration rdf:type owl:ObjectProperty ;
+                 rdfs:label "продолжительность освещения" .
+
+
+###  http://www.w3.org/2006/time#hasEnd
+time:hasEnd rdf:type owl:ObjectProperty ;
+            rdfs:label "время окончания" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasGeneralTimetable
 :hasGeneralTimetable rdf:type owl:ObjectProperty ;
                      rdfs:domain :City ;
-                     rdfs:range :GeneralTimetable ;
-                     rdfs:label "главное расписание" .
+                     rdfs:range :Timetable ;
+                     rdfs:label "график светоосвещения" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasGeometry
 :hasGeometry rdf:type owl:ObjectProperty ;
              rdfs:range :Geometry ;
              rdfs:label "геометрия" .
+
+
+###  http://www.w3id.org/citylights-graph#hasIlluminationInterval
+:hasIlluminationInterval rdf:type owl:ObjectProperty ;
+                         rdfs:domain :Timetable ;
+                         rdfs:range :TimetableParameter ;
+                         rdfs:label "интервал освещения" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasLighting
@@ -51,23 +69,21 @@
 #    Data properties
 #################################################################
 
+###  http://www.w3.org/2006/time#inXSDDateTime
+time:inXSDDateTime rdf:type owl:DatatypeProperty ;
+                   rdfs:label "точное время" .
+
+
+###  http://www.w3.org/2006/time#minutes
+time:minutes rdf:type owl:DatatypeProperty ;
+             rdfs:label "длительность в минутах" .
+
+
 ###  http://www.w3id.org/citylights-graph#hasBandwidth
 :hasBandwidth rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf :hasRoadsProperty ;
               rdfs:range xsd:integer ;
               rdfs:label "пропускная способность" .
-
-
-###  http://www.w3id.org/citylights-graph#hasDayEnd
-:hasDayEnd rdf:type owl:DatatypeProperty ;
-           rdfs:subPropertyOf :hasTimetableProperty ;
-           rdfs:label "день окончания" .
-
-
-###  http://www.w3id.org/citylights-graph#hasDayStart
-:hasDayStart rdf:type owl:DatatypeProperty ;
-             rdfs:subPropertyOf :hasTimetableProperty ;
-             rdfs:label "день начала" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasDistanceBetween
@@ -124,21 +140,9 @@
                         rdfs:label "расчётная скорость движения" .
 
 
-###  http://www.w3id.org/citylights-graph#hasTimeEnd
-:hasTimeEnd rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf :hasTimetableProperty ;
-            rdfs:label "время окончания" .
-
-
-###  http://www.w3id.org/citylights-graph#hasTimeStart
-:hasTimeStart rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :hasTimetableProperty ;
-              rdfs:label "время начала" .
-
-
 ###  http://www.w3id.org/citylights-graph#hasTimetableProperty
 :hasTimetableProperty rdf:type owl:DatatypeProperty ;
-                      rdfs:domain :ConstantTimetable ;
+                      rdfs:domain :TimetableParameter ;
                       rdfs:label "атрибут расписания" .
 
 
@@ -203,24 +207,41 @@
 
 ###  http://www.w3id.org/citylights-graph#City
 :City rdf:type owl:Class ;
+      rdfs:comment "Предлагаю использовать индивиды и классы из онтологии ОКТМО \"Города федерального значения\" и \"Населённый пункт\"" ;
       rdfs:label "Город" .
-
-
-###  http://www.w3id.org/citylights-graph#ConstantTimetable
-:ConstantTimetable rdf:type owl:Class ;
-                   rdfs:subClassOf :Timetable ;
-                   rdfs:label "Постоянное расписание" .
-
-
-###  http://www.w3id.org/citylights-graph#GeneralTimetable
-:GeneralTimetable rdf:type owl:Class ;
-                  rdfs:subClassOf :Timetable ;
-                  rdfs:label "Главное расписание" .
 
 
 ###  http://www.w3id.org/citylights-graph#Geometry
 :Geometry rdf:type owl:Class ;
           rdfs:label "Геометрия" .
+
+
+###  http://www.w3id.org/citylights-graph#IlluminationEnd
+:IlluminationEnd rdf:type owl:Class ;
+                 rdfs:subClassOf :TimetableParameter ,
+                  time:Instant;
+                 rdfs:label "Конец освещения" .
+
+
+###  http://www.w3id.org/citylights-graph#IlluminationInterval
+:IlluminationInterval rdf:type owl:Class ;
+                      rdfs:subClassOf :TimetableParameter ,
+                      time:ProperInterval;
+                      rdfs:label "Интервал освещения" .
+
+
+###  http://www.w3id.org/citylights-graph#IlluminationIntervalDuration
+:IlluminationIntervalDuration rdf:type owl:Class ;
+                              rdfs:subClassOf :TimetableParameter ,
+                              time:Duration;
+                              rdfs:label "Длительность освещения" .
+
+
+###  http://www.w3id.org/citylights-graph#IlluminationStart
+:IlluminationStart rdf:type owl:Class ;
+                   rdfs:subClassOf :TimetableParameter ,
+                    time:Instant;
+                   rdfs:label "Начало освещения" .
 
 
 ###  http://www.w3id.org/citylights-graph#LEDLamp
@@ -247,7 +268,13 @@
 
 ###  http://www.w3id.org/citylights-graph#Timetable
 :Timetable rdf:type owl:Class ;
-           rdfs:label "Расписание" .
+           rdfs:comment "Предлагается сделать этот класс, подклассом класса \"Документ\" из основной онтологии." ;
+           rdfs:label "График освещения" .
+
+
+###  http://www.w3id.org/citylights-graph#TimetableParameter
+:TimetableParameter rdf:type owl:Class ;
+                    rdfs:label "Параметры расписания" .
 
 
 ###  http://www.w3id.org/citylights-graph#V-ClassRoad
@@ -332,6 +359,40 @@
 ###  http://www.w3id.org/citylights-graph#4-50-400-001-30
 <http://www.w3id.org/citylights-graph#4-50-400-001-30> rdf:type owl:Class ;
                                                        rdfs:subClassOf :SodiumLamp .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.w3id.org/citylights-graph#Moscow
+:Moscow rdf:type owl:NamedIndividual ,
+                 :City ;
+        :hasIlluminationInterval :Moscow_I_01_01 .
+
+
+###  http://www.w3id.org/citylights-graph#Moscow_E_01_01
+:Moscow_E_01_01 rdf:type owl:NamedIndividual ,
+                         :IlluminationEnd .
+
+
+###  http://www.w3id.org/citylights-graph#Moscow_ID_01_01
+:Moscow_ID_01_01 rdf:type owl:NamedIndividual ,
+                          :IlluminationIntervalDuration ;
+                 time:minutes 100 .
+
+
+###  http://www.w3id.org/citylights-graph#Moscow_I_01_01
+:Moscow_I_01_01 rdf:type owl:NamedIndividual ,
+                         :IlluminationInterval ;
+                time:hasBeginning :Moscow_S_01_01 ;
+                time:hasDuration :Moscow_ID_01_01 ;
+                time:hasEnd :Moscow_E_01_01 .
+
+
+###  http://www.w3id.org/citylights-graph#Moscow_S_01_01
+:Moscow_S_01_01 rdf:type owl:NamedIndividual ,
+                         :IlluminationStart .
 
 
 ###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
