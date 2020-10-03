@@ -1,398 +1,1672 @@
-@prefix : <http://www.w3id.org/citylights-graph#> .
-@prefix cl: <http://www.w3id.org/citylights-graph> .
-@prefix sf: <http://www.opengis.net/ont/sf#> .
-@prefix geo: <http://www.opengis.net/ont/geosparql#> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix xml: <http://www.w3.org/XML/1998/namespace> .
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix time: <http://www.w3.org/2006/time#> .
-@base <http://www.w3id.org/citylights-graph> .
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.w3id.org/citylights-graph"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.w3id.org/citylights-graph">
+    <Prefix name="" IRI="http://www.w3id.org/citylights-graph#"/>
+    <Prefix name="cg" IRI="http://www.w3id.org/citygraph-core#"/>
+    <Prefix name="cl" IRI="http://www.w3id.org/citylights-graph"/>
+    <Prefix name="sf" IRI="http://www.opengis.net/ont/sf#"/>
+    <Prefix name="OGD" IRI="http://www.w3id.org/opengovdata#"/>
+    <Prefix name="geo" IRI="http://www.opengis.net/ont/geosparql#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="time" IRI="http://www.w3.org/2006/time#"/>
+    <Declaration>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/AuxiliaryTrafficArea"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/TransportationComplex"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="time:Duration"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="time:Instant"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="time:ProperInterval"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="cg:Document"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="cg:Geometry"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#A-class_Road"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#A1-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#A2-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#A3-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#A4-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#B-class_Road"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#B1-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#B2-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#City"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Lighting"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RoadIllumination"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Timetable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#V-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#V1-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#V2-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#V3-ClassRoad"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="OGD:FederalCity"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="OGD:Locality"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="time:hasBeginning"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="time:hasDuration"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty abbreviatedIRI="time:hasEnd"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasGeneralTimetable"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasGeometry"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasIlluminationInterval"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLighting"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasRoad"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#illuminationType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="time:inXSDDateTime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty abbreviatedIRI="time:minutes"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasBandwidthMax"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasBandwidthMin"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDistanceBetween"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLampType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLightingProperty"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLinesCountMax"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLinesCountMin"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMinimalIllumination"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPower"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#illuminationAmount"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isProvidedWithIllumination"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow_E_01_01"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow_ID_01_01"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow_I_01_01"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow_Road_1"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow_Road_1_Lighting"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Moscow_S_01_01"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-30-250-001-15/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-30-250-001-16/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-40-250-001-15/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-40-250-001-16/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-40-250-001-18"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-40-250-001-8"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-50-250-001-13/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#1-50-250-001-16/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#2-40-250-001-19/5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#2-50-150-001-10"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#4-50-400-001-30"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#notConvertable"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/TransportationComplex"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#A-class_Road"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#A1-ClassRoad"/>
+        <Class IRI="#A-class_Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#A2-ClassRoad"/>
+        <Class IRI="#A-class_Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#A3-ClassRoad"/>
+        <Class IRI="#A-class_Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#A4-ClassRoad"/>
+        <Class IRI="#A-class_Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#B-class_Road"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#B1-ClassRoad"/>
+        <Class IRI="#B-class_Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#B2-ClassRoad"/>
+        <Class IRI="#B-class_Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Lighting"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/AuxiliaryTrafficArea"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Timetable"/>
+        <Class abbreviatedIRI="cg:Document"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#V-ClassRoad"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#V1-ClassRoad"/>
+        <Class IRI="#V-ClassRoad"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#V2-ClassRoad"/>
+        <Class IRI="#V-ClassRoad"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#V3-ClassRoad"/>
+        <Class IRI="#V-ClassRoad"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="OGD:FederalCity"/>
+        <Class IRI="#City"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="OGD:Locality"/>
+        <Class IRI="#City"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#City"/>
+        <NamedIndividual IRI="#Moscow"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="time:Instant"/>
+        <NamedIndividual IRI="#Moscow_E_01_01"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="time:ProperInterval"/>
+        <NamedIndividual IRI="#Moscow_I_01_01"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#A1-ClassRoad"/>
+        <NamedIndividual IRI="#Moscow_Road_1"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="time:Instant"/>
+        <NamedIndividual IRI="#Moscow_S_01_01"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-30-250-001-15/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-30-250-001-16/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-40-250-001-15/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-40-250-001-16/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-40-250-001-18"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-40-250-001-8"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-50-250-001-13/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#1-50-250-001-16/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#2-40-250-001-19/5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#2-50-150-001-10"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Lighting"/>
+        <NamedIndividual IRI="#4-50-400-001-30"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasIlluminationInterval"/>
+        <NamedIndividual IRI="#Moscow"/>
+        <NamedIndividual IRI="#Moscow_I_01_01"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasRoad"/>
+        <NamedIndividual IRI="#Moscow"/>
+        <NamedIndividual IRI="#Moscow_Road_1"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="time:hasBeginning"/>
+        <NamedIndividual IRI="#Moscow_I_01_01"/>
+        <NamedIndividual IRI="#Moscow_S_01_01"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="time:hasDuration"/>
+        <NamedIndividual IRI="#Moscow_I_01_01"/>
+        <NamedIndividual IRI="#Moscow_ID_01_01"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty abbreviatedIRI="time:hasEnd"/>
+        <NamedIndividual IRI="#Moscow_I_01_01"/>
+        <NamedIndividual IRI="#Moscow_E_01_01"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasLighting"/>
+        <NamedIndividual IRI="#Moscow_Road_1"/>
+        <NamedIndividual IRI="#Moscow_Road_1_Lighting"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#illuminationType"/>
+        <NamedIndividual IRI="#Moscow_Road_1_Lighting"/>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="time:inXSDDateTime"/>
+        <NamedIndividual IRI="#Moscow_E_01_01"/>
+        <Literal>2020-01-02T09:50:00+03:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="time:minutes"/>
+        <NamedIndividual IRI="#Moscow_ID_01_01"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#illuminationAmount"/>
+        <NamedIndividual IRI="#Moscow_Road_1_Lighting"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty abbreviatedIRI="time:inXSDDateTime"/>
+        <NamedIndividual IRI="#Moscow_S_01_01"/>
+        <Literal>2020-01-01T16:15:00+03:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">39</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">150</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-30-150-001-9"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-30-250-001-15/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">39</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-30-250-001-15/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-30-250-001-15/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-30-250-001-15/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">15.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-30-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">36</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-30-250-001-16/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-30-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-30-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">16.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-40-250-001-15/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">39</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-40-250-001-15/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-40-250-001-15/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-40-250-001-15/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">15.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-40-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">36</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-40-250-001-16/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-40-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-40-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">16.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-40-250-001-18"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">33</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-40-250-001-18"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-40-250-001-18"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-40-250-001-18"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">18</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-40-250-001-8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">36</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-40-250-001-8"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-40-250-001-8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-40-250-001-8"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-50-250-001-13/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">45</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-50-250-001-13/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-50-250-001-13/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-50-250-001-13/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">13.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#1-50-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">36</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#1-50-250-001-16/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#1-50-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#1-50-250-001-16/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">16.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#2-40-250-001-19/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">31</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#2-40-250-001-19/5"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#2-40-250-001-19/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">250</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#2-40-250-001-19/5"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">19.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#2-50-150-001-10"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">35</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#2-50-150-001-10"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#2-50-150-001-10"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">150</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#2-50-150-001-10"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <NamedIndividual IRI="#4-50-400-001-30"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">65</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasLampType"/>
+        <NamedIndividual IRI="#4-50-400-001-30"/>
+        <Literal>Натриевая</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPower"/>
+        <NamedIndividual IRI="#4-50-400-001-30"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">400</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <NamedIndividual IRI="#4-50-400-001-30"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">30</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="time:hasBeginning"/>
+        <Class abbreviatedIRI="time:ProperInterval"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="time:hasDuration"/>
+        <Class abbreviatedIRI="time:ProperInterval"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty abbreviatedIRI="time:hasEnd"/>
+        <Class abbreviatedIRI="time:ProperInterval"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasGeneralTimetable"/>
+        <Class IRI="#City"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasIlluminationInterval"/>
+        <Class IRI="#City"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasLighting"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasRoad"/>
+        <Class IRI="#City"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#illuminationType"/>
+        <Class IRI="#RoadIllumination"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="time:hasBeginning"/>
+        <Class abbreviatedIRI="time:Instant"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="time:hasDuration"/>
+        <Class abbreviatedIRI="time:Duration"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty abbreviatedIRI="time:hasEnd"/>
+        <Class abbreviatedIRI="time:Instant"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasGeneralTimetable"/>
+        <Class IRI="#Timetable"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasGeometry"/>
+        <Class abbreviatedIRI="cg:Geometry"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasIlluminationInterval"/>
+        <Class abbreviatedIRI="time:ProperInterval"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasLighting"/>
+        <Class IRI="#RoadIllumination"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasRoad"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#illuminationType"/>
+        <Class IRI="#Lighting"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasBandwidthMax"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasBandwidthMin"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <DataProperty IRI="#hasLightingProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasLampType"/>
+        <DataProperty IRI="#hasLightingProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasLinesCountMax"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasLinesCountMin"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasMinimalIllumination"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasPower"/>
+        <DataProperty IRI="#hasLightingProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <DataProperty IRI="#hasLightingProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#isProvidedWithIllumination"/>
+        <DataProperty IRI="#hasRoadsProperty"/>
+    </SubDataPropertyOf>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="time:inXSDDateTime"/>
+        <Class abbreviatedIRI="time:Instant"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty abbreviatedIRI="time:minutes"/>
+        <Class abbreviatedIRI="time:Duration"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasBandwidthMax"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasBandwidthMin"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLampType"/>
+        <Class IRI="#Lighting"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLightingProperty"/>
+        <Class IRI="#Lighting"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLinesCountMax"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLinesCountMin"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMinimalIllumination"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#illuminationAmount"/>
+        <Class IRI="#RoadIllumination"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isProvidedWithIllumination"/>
+        <Class IRI="http://www.opengis.net/citygml/transportation/2.0/Road"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="time:inXSDDateTime"/>
+        <Datatype abbreviatedIRI="xsd:dateTimeStamp"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty abbreviatedIRI="time:minutes"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasBandwidthMax"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasBandwidthMin"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDistanceBetween"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLampType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLinesCountMax"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLinesCountMin"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMinimalIllumination"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasPower"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasPowerPerKilometer"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#illuminationAmount"/>
+        <Datatype abbreviatedIRI="xsd:int"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isProvidedWithIllumination"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S1</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#A1-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">30</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S2</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#A2-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">100</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">80</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">20</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S3</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#A3-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">7</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">90</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">90</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">20</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S4</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#A4-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">80</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">80</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">20</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S5</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#B1-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">70</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">20</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S6</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#B2-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">15</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S9</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#V1-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">0.5</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">6</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S7</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#V1-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.5</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">15</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <DLSafeRule>
+        <Annotation>
+            <AnnotationProperty IRI="http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal></Literal>
+        </Annotation>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+            <Literal>S8</Literal>
+        </Annotation>
+        <Body>
+            <ClassAtom>
+                <Class IRI="#V2-ClassRoad"/>
+                <Variable IRI="#x"/>
+            </ClassAtom>
+        </Body>
+        <Head>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">1.5</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasBandwidthMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">3</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasStandartTravelSpeedMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">60</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMin"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">2</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasLinesCountMax"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+            </DataPropertyAtom>
+            <DataPropertyAtom>
+                <DataProperty IRI="#hasMinimalIllumination"/>
+                <Variable IRI="#x"/>
+                <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">10</Literal>
+            </DataPropertyAtom>
+        </Head>
+    </DLSafeRule>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://www.opengis.net/citygml/transportation/2.0/AuxiliaryTrafficArea</IRI>
+        <Literal>Вспомогательная зона</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://www.opengis.net/citygml/transportation/2.0/Road</IRI>
+        <Literal xml:lang="en">Road</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://www.opengis.net/citygml/transportation/2.0/Road</IRI>
+        <Literal xml:lang="ru">Дорога</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>http://www.opengis.net/citygml/transportation/2.0/TransportationComplex</IRI>
+        <Literal>Транспортный комплекс</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>time:hasBeginning</AbbreviatedIRI>
+        <Literal>время начала</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>time:hasDuration</AbbreviatedIRI>
+        <Literal>продолжительность освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>time:hasEnd</AbbreviatedIRI>
+        <Literal>время окончания</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>time:inXSDDateTime</AbbreviatedIRI>
+        <Literal>точное время</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>time:minutes</AbbreviatedIRI>
+        <Literal>длительность в минутах</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>cg:Document</AbbreviatedIRI>
+        <Literal>Документ</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>cg:Geometry</AbbreviatedIRI>
+        <Literal>Геометрия</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#A-class_Road</IRI>
+        <Literal>Дорога городского значения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#A1-ClassRoad</IRI>
+        <Literal>Дорога класса А1</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#A2-ClassRoad</IRI>
+        <Literal>Дорога класса А2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#A3-ClassRoad</IRI>
+        <Literal>Дорога класса А3</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#A4-ClassRoad</IRI>
+        <Literal>Дорога класса А4</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#B-class_Road</IRI>
+        <Literal>Дорога районного значения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#B1-ClassRoad</IRI>
+        <Literal>Дорога класса Б2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#B2-ClassRoad</IRI>
+        <Literal>Дорога класса Б2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#City</IRI>
+        <Literal>Предлагаю использовать индивиды и классы из онтологии ОКТМО &quot;Города федерального значения&quot; и &quot;Населённый пункт&quot;</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#City</IRI>
+        <Literal>Город</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Lighting</IRI>
+        <Literal>Элемент освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#RoadIllumination</IRI>
+        <Literal>Дорожное освещение</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Timetable</IRI>
+        <Literal>Предлагается сделать этот класс, подклассом класса &quot;Документ&quot; из основной онтологии.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#Timetable</IRI>
+        <Literal>График освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#V-ClassRoad</IRI>
+        <Literal>Дорога местного значения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#V1-ClassRoad</IRI>
+        <Literal>Дорога класса В1</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#V2-ClassRoad</IRI>
+        <Literal>Дорога класса В2</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#V3-ClassRoad</IRI>
+        <Literal>Дорога класса В3</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasBandwidthMax</IRI>
+        <Literal>максимальная пропускная способность</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasBandwidthMin</IRI>
+        <Literal>минимальная пропускная способность</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasDistanceBetween</IRI>
+        <Literal>расстояние между</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasGeneralTimetable</IRI>
+        <Literal>график светоосвещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasGeometry</IRI>
+        <Literal>геометрия</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasIlluminationInterval</IRI>
+        <Literal>интервал освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasLampType</IRI>
+        <Literal>тип лампы</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasLighting</IRI>
+        <Literal>освещение</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasLightingProperty</IRI>
+        <Literal>атрибут освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasLinesCountMax</IRI>
+        <Literal>максимальное количество полос движения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasLinesCountMin</IRI>
+        <Literal>минимальное количество полос движения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasMinimalIllumination</IRI>
+        <Literal>минимальное освещение</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasPower</IRI>
+        <Literal>мощность</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasPowerPerKilometer</IRI>
+        <Literal>мощность на 1 км</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasRoad</IRI>
+        <Literal>дорога</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasRoadsProperty</IRI>
+        <Literal>атрибут дороги</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasStandartTravelSpeedMax</IRI>
+        <Literal>максимальная рассчётная скорость движения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#hasStandartTravelSpeedMin</IRI>
+        <Literal>минимальная расчётная скорость движения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#illuminationAmount</IRI>
+        <Literal>количество элементов освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#illuminationType</IRI>
+        <Literal>тип освещения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>#isProvidedWithIllumination</IRI>
+        <Literal>обеспечена освещением</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>OGD:FederalCity</AbbreviatedIRI>
+        <Literal>Город федерального значения</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <AbbreviatedIRI>OGD:Locality</AbbreviatedIRI>
+        <Literal>Населённый пункт</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
 
-<http://www.w3id.org/citylights-graph> rdf:type owl:Ontology .
-
-#################################################################
-#    Object Properties
-#################################################################
-
-###  http://www.w3.org/2006/time#hasBeginning
-time:hasBeginning rdf:type owl:ObjectProperty ;
-                  rdfs:label "время начала" .
-
-
-###  http://www.w3.org/2006/time#hasDuration
-time:hasDuration rdf:type owl:ObjectProperty ;
-                 rdfs:label "продолжительность освещения" .
-
-
-###  http://www.w3.org/2006/time#hasEnd
-time:hasEnd rdf:type owl:ObjectProperty ;
-            rdfs:label "время окончания" .
-
-
-###  http://www.w3id.org/citylights-graph#hasGeneralTimetable
-:hasGeneralTimetable rdf:type owl:ObjectProperty ;
-                     rdfs:domain :City ;
-                     rdfs:range :Timetable ;
-                     rdfs:label "график светоосвещения" .
-
-
-###  http://www.w3id.org/citylights-graph#hasGeometry
-:hasGeometry rdf:type owl:ObjectProperty ;
-             rdfs:range :Geometry ;
-             rdfs:label "геометрия" .
-
-
-###  http://www.w3id.org/citylights-graph#hasIlluminationInterval
-:hasIlluminationInterval rdf:type owl:ObjectProperty ;
-                         rdfs:domain :Timetable ;
-                         rdfs:range :TimetableParameter ;
-                         rdfs:label "интервал освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#hasLighting
-:hasLighting rdf:type owl:ObjectProperty ;
-             rdfs:domain :Road ;
-             rdfs:range :Lighting ;
-             rdfs:label "освещение" .
-
-
-###  http://www.w3id.org/citylights-graph#hasRoad
-:hasRoad rdf:type owl:ObjectProperty ;
-         rdfs:domain :City ;
-         rdfs:range :Road ;
-         rdfs:label "дорога" .
-
-
-#################################################################
-#    Data properties
-#################################################################
-
-###  http://www.w3.org/2006/time#inXSDDateTime
-time:inXSDDateTime rdf:type owl:DatatypeProperty ;
-                   rdfs:label "точное время" .
-
-
-###  http://www.w3.org/2006/time#minutes
-time:minutes rdf:type owl:DatatypeProperty ;
-             rdfs:label "длительность в минутах" .
-
-
-###  http://www.w3id.org/citylights-graph#hasBandwidth
-:hasBandwidth rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf :hasRoadsProperty ;
-              rdfs:range xsd:integer ;
-              rdfs:label "пропускная способность" .
-
-
-###  http://www.w3id.org/citylights-graph#hasDistanceBetween
-:hasDistanceBetween rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf :hasLightingProperty ;
-                    rdfs:range xsd:integer ;
-                    rdfs:label "расстояние между" .
-
-
-###  http://www.w3id.org/citylights-graph#hasLightingProperty
-:hasLightingProperty rdf:type owl:DatatypeProperty ;
-                     rdfs:domain :Lighting ;
-                     rdfs:label "атрибут освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#hasLinesCount
-:hasLinesCount rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf :hasRoadsProperty ;
-               rdfs:range xsd:integer ;
-               rdfs:label "количество полос движения" .
-
-
-###  http://www.w3id.org/citylights-graph#hasMinimalIllumination
-:hasMinimalIllumination rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf :hasRoadsProperty ;
-                        rdfs:range xsd:integer ;
-                        rdfs:label "минимальное освещение" .
-
-
-###  http://www.w3id.org/citylights-graph#hasPower
-:hasPower rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf :hasLightingProperty ;
-          rdfs:range xsd:integer ;
-          rdfs:label "мощность" .
-
-
-###  http://www.w3id.org/citylights-graph#hasPowerPerKilometer
-:hasPowerPerKilometer rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf :hasLightingProperty ;
-                      rdfs:range xsd:integer ;
-                      rdfs:label "мощность на 1 км" .
-
-
-###  http://www.w3id.org/citylights-graph#hasRoadsProperty
-:hasRoadsProperty rdf:type owl:DatatypeProperty ;
-                  rdfs:domain :Road ;
-                  rdfs:label "атрибут дороги" .
-
-
-###  http://www.w3id.org/citylights-graph#hasStandartTravelSpeed
-:hasStandartTravelSpeed rdf:type owl:DatatypeProperty ;
-                        rdfs:subPropertyOf :hasRoadsProperty ;
-                        rdfs:range xsd:integer ;
-                        rdfs:label "расчётная скорость движения" .
-
-
-###  http://www.w3id.org/citylights-graph#hasTimetableProperty
-:hasTimetableProperty rdf:type owl:DatatypeProperty ;
-                      rdfs:domain :TimetableParameter ;
-                      rdfs:label "атрибут расписания" .
-
-
-###  http://www.w3id.org/citylights-graph#isProvidedWithIllumination
-:isProvidedWithIllumination rdf:type owl:DatatypeProperty ;
-                            rdfs:subPropertyOf :hasRoadsProperty ;
-                            rdfs:range xsd:boolean ;
-                            rdfs:label "обеспечена освещением" .
-
-
-#################################################################
-#    Classes
-#################################################################
-
-###  http://www.w3id.org/citylights-graph#A-class_Road
-:A-class_Road rdf:type owl:Class ;
-              rdfs:subClassOf :Road ;
-              rdfs:label "Дорога городского значения" .
-
-
-###  http://www.w3id.org/citylights-graph#A1-ClassRoad
-:A1-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :A-class_Road ;
-              rdfs:label "Дорога класса А1" .
-
-
-###  http://www.w3id.org/citylights-graph#A2-ClassRoad
-:A2-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :A-class_Road ;
-              rdfs:label "Дорога класса А2" .
-
-
-###  http://www.w3id.org/citylights-graph#A3-ClassRoad
-:A3-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :A-class_Road ;
-              rdfs:label "Дорога класса А3" .
-
-
-###  http://www.w3id.org/citylights-graph#A4-ClassRoad
-:A4-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :A-class_Road ;
-              rdfs:label "Дорога класса А4" .
-
-
-###  http://www.w3id.org/citylights-graph#B-class_Road
-:B-class_Road rdf:type owl:Class ;
-              rdfs:subClassOf :Road ;
-              rdfs:label "Дорога районного значения" .
-
-
-###  http://www.w3id.org/citylights-graph#B1-ClassRoad
-:B1-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :B-class_Road ;
-              rdfs:label "Дорога класса Б2" .
-
-
-###  http://www.w3id.org/citylights-graph#B2-ClassRoad
-:B2-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :B-class_Road ;
-              rdfs:label "Дорога класса Б2" .
-
-
-###  http://www.w3id.org/citylights-graph#City
-:City rdf:type owl:Class ;
-      rdfs:comment "Предлагаю использовать индивиды и классы из онтологии ОКТМО \"Города федерального значения\" и \"Населённый пункт\"" ;
-      rdfs:label "Город" .
-
-
-###  http://www.w3id.org/citylights-graph#Geometry
-:Geometry rdf:type owl:Class ;
-          rdfs:label "Геометрия" .
-
-
-###  http://www.w3id.org/citylights-graph#IlluminationEnd
-:IlluminationEnd rdf:type owl:Class ;
-                 rdfs:subClassOf :TimetableParameter ,
-                  time:Instant;
-                 rdfs:label "Конец освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#IlluminationInterval
-:IlluminationInterval rdf:type owl:Class ;
-                      rdfs:subClassOf :TimetableParameter ,
-                      time:ProperInterval;
-                      rdfs:label "Интервал освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#IlluminationIntervalDuration
-:IlluminationIntervalDuration rdf:type owl:Class ;
-                              rdfs:subClassOf :TimetableParameter ,
-                              time:Duration;
-                              rdfs:label "Длительность освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#IlluminationStart
-:IlluminationStart rdf:type owl:Class ;
-                   rdfs:subClassOf :TimetableParameter ,
-                    time:Instant;
-                   rdfs:label "Начало освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#LEDLamp
-:LEDLamp rdf:type owl:Class ;
-         rdfs:subClassOf :Lighting ;
-         rdfs:label "Светодиодня лампа" .
-
-
-###  http://www.w3id.org/citylights-graph#Lighting
-:Lighting rdf:type owl:Class ;
-          rdfs:label "Элемент освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#Road
-:Road rdf:type owl:Class ;
-      rdfs:label "Дорога" .
-
-
-###  http://www.w3id.org/citylights-graph#SodiumLamp
-:SodiumLamp rdf:type owl:Class ;
-            rdfs:subClassOf :Lighting ;
-            rdfs:label "Натриевая лампа" .
-
-
-###  http://www.w3id.org/citylights-graph#Timetable
-:Timetable rdf:type owl:Class ;
-           rdfs:comment "Предлагается сделать этот класс, подклассом класса \"Документ\" из основной онтологии." ;
-           rdfs:label "График освещения" .
-
-
-###  http://www.w3id.org/citylights-graph#TimetableParameter
-:TimetableParameter rdf:type owl:Class ;
-                    rdfs:label "Параметры расписания" .
-
-
-###  http://www.w3id.org/citylights-graph#V-ClassRoad
-:V-ClassRoad rdf:type owl:Class ;
-             rdfs:subClassOf :Road ;
-             rdfs:label "Дорога местного значения" .
-
-
-###  http://www.w3id.org/citylights-graph#V1-ClassRoad
-:V1-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :V-ClassRoad ;
-              rdfs:label "Дорога класса В1" .
-
-
-###  http://www.w3id.org/citylights-graph#V2-ClassRoad
-:V2-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :V-ClassRoad ;
-              rdfs:label "Дорога класса В2" .
-
-
-###  http://www.w3id.org/citylights-graph#V3-ClassRoad
-:V3-ClassRoad rdf:type owl:Class ;
-              rdfs:subClassOf :V-ClassRoad ;
-              rdfs:label "Дорога класса В3" .
-
-
-###  http://www.w3id.org/citylights-graph#1-30-150-001-9
-<http://www.w3id.org/citylights-graph#1-30-150-001-9> rdf:type owl:Class ;
-                                                      rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-30-250-001-15.5
-<http://www.w3id.org/citylights-graph#1-30-250-001-15.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-30-250-001-16.5
-<http://www.w3id.org/citylights-graph#1-30-250-001-16.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-40-250-001-15.5
-<http://www.w3id.org/citylights-graph#1-40-250-001-15.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-40-250-001-16.5
-<http://www.w3id.org/citylights-graph#1-40-250-001-16.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-40-250-001-18
-<http://www.w3id.org/citylights-graph#1-40-250-001-18> rdf:type owl:Class ;
-                                                       rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-40-250-001-8
-<http://www.w3id.org/citylights-graph#1-40-250-001-8> rdf:type owl:Class ;
-                                                      rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-50-250-001-13.5
-<http://www.w3id.org/citylights-graph#1-50-250-001-13.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#1-50-250-001-16.5
-<http://www.w3id.org/citylights-graph#1-50-250-001-16.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#2-40-250-001-19.5
-<http://www.w3id.org/citylights-graph#2-40-250-001-19.5> rdf:type owl:Class ;
-                                                         rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#2-50-150-001-10
-<http://www.w3id.org/citylights-graph#2-50-150-001-10> rdf:type owl:Class ;
-                                                       rdfs:subClassOf :SodiumLamp .
-
-
-###  http://www.w3id.org/citylights-graph#4-50-400-001-30
-<http://www.w3id.org/citylights-graph#4-50-400-001-30> rdf:type owl:Class ;
-                                                       rdfs:subClassOf :SodiumLamp .
-
-
-#################################################################
-#    Individuals
-#################################################################
-
-###  http://www.w3id.org/citylights-graph#Moscow
-:Moscow rdf:type owl:NamedIndividual ,
-                 :City ;
-        :hasIlluminationInterval :Moscow_I_01_01 .
-
-
-###  http://www.w3id.org/citylights-graph#Moscow_E_01_01
-:Moscow_E_01_01 rdf:type owl:NamedIndividual ,
-                         :IlluminationEnd .
-
-
-###  http://www.w3id.org/citylights-graph#Moscow_ID_01_01
-:Moscow_ID_01_01 rdf:type owl:NamedIndividual ,
-                          :IlluminationIntervalDuration ;
-                 time:minutes 100 .
-
-
-###  http://www.w3id.org/citylights-graph#Moscow_I_01_01
-:Moscow_I_01_01 rdf:type owl:NamedIndividual ,
-                         :IlluminationInterval ;
-                time:hasBeginning :Moscow_S_01_01 ;
-                time:hasDuration :Moscow_ID_01_01 ;
-                time:hasEnd :Moscow_E_01_01 .
-
-
-###  http://www.w3id.org/citylights-graph#Moscow_S_01_01
-:Moscow_S_01_01 rdf:type owl:NamedIndividual ,
-                         :IlluminationStart .
-
-
-###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
