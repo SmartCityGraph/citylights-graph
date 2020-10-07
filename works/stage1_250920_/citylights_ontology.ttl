@@ -132,6 +132,13 @@ time:minutes rdf:type owl:DatatypeProperty ;
                  rdfs:label "минимальная пропускная способность" .
 
 
+###  http://www.w3id.org/citylights-graph#hasCoordinates
+:hasCoordinates rdf:type owl:DatatypeProperty ;
+                rdfs:domain cg:Geometry ;
+                rdfs:range xsd:string ;
+                rdfs:label "координаты" .
+
+
 ###  http://www.w3id.org/citylights-graph#hasDistanceBetween
 :hasDistanceBetween rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf :hasLightingProperty ;
@@ -251,12 +258,14 @@ time:ProperInterval rdf:type owl:Class .
 
 ###  http://www.w3id.org/citygraph-core#Document
 cg:Document rdf:type owl:Class ;
-            rdfs:label "Документ" .
+            rdfs:label "Документ" ;
+            :notConvertable "true"^^xsd:boolean .
 
 
 ###  http://www.w3id.org/citygraph-core#Geometry
 cg:Geometry rdf:type owl:Class ;
-            rdfs:label "Геометрия" .
+            rdfs:label "Геометрия" ;
+            :notConvertable "true"^^xsd:boolean .
 
 
 ###  http://www.w3id.org/citylights-graph#City
