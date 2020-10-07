@@ -106,7 +106,8 @@ time:hasEnd rdf:type owl:ObjectProperty ;
 time:inXSDDateTime rdf:type owl:DatatypeProperty ;
                    rdfs:domain time:Instant ;
                    rdfs:range xsd:dateTimeStamp ;
-                   rdfs:label "точное время" .
+                   rdfs:label "точное время" ;
+                   :ERDname "time" .
 
 
 ###  http://www.w3.org/2006/time#minutes
@@ -136,7 +137,8 @@ time:minutes rdf:type owl:DatatypeProperty ;
 :hasCoordinates rdf:type owl:DatatypeProperty ;
                 rdfs:domain cg:Geometry ;
                 rdfs:range xsd:string ;
-                rdfs:label "координаты" .
+                rdfs:label "координаты" ;
+                :ERDname "coords" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasDistanceBetween
@@ -182,6 +184,11 @@ time:minutes rdf:type owl:DatatypeProperty ;
                         rdfs:domain <http://www.opengis.net/citygml/transportation/2.0/Road> ;
                         rdfs:range xsd:int ;
                         rdfs:label "минимальное освещение" .
+
+
+###  http://www.w3id.org/citylights-graph#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:label "название города" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasPower
@@ -245,15 +252,18 @@ time:minutes rdf:type owl:DatatypeProperty ;
 
 
 ###  http://www.w3.org/2006/time#Duration
-time:Duration rdf:type owl:Class .
+time:Duration rdf:type owl:Class ;
+              :notConvertable "true"^^xsd:boolean .
 
 
 ###  http://www.w3.org/2006/time#Instant
-time:Instant rdf:type owl:Class .
+time:Instant rdf:type owl:Class ;
+             :notConvertable "true"^^xsd:boolean .
 
 
 ###  http://www.w3.org/2006/time#ProperInterval
-time:ProperInterval rdf:type owl:Class .
+time:ProperInterval rdf:type owl:Class ;
+                    :ERDname "LightingInterval" .
 
 
 ###  http://www.w3id.org/citygraph-core#Document
@@ -382,8 +392,10 @@ OGD:Locality rdf:type owl:Class ;
 ###  http://www.w3id.org/citylights-graph#Moscow
 :Moscow rdf:type owl:NamedIndividual ,
                  OGD:FederalCity ;
+        :hasGeometry :Moscow_geo ;
         :hasIlluminationInterval :Moscow_I_01_01 ;
-        :hasRoad :Moscow_Road_1 .
+        :hasRoad :Moscow_Road_1 ;
+        :hasName "Москва" .
 
 
 ###  http://www.w3id.org/citylights-graph#Moscow_E_01_01
@@ -409,6 +421,7 @@ OGD:Locality rdf:type owl:Class ;
 ###  http://www.w3id.org/citylights-graph#Moscow_Road_1
 :Moscow_Road_1 rdf:type owl:NamedIndividual ,
                         :Road_A1 ;
+               :hasGeometry :Road1_geo ;
                :hasLighting :Moscow_Road_1_Lighting .
 
 
@@ -425,38 +438,67 @@ OGD:Locality rdf:type owl:Class ;
                 time:inXSDDateTime "2020-01-01T16:15:00+03:00" .
 
 
+###  http://www.w3id.org/citylights-graph#Moscow_geo
+:Moscow_geo rdf:type owl:NamedIndividual ,
+                     cg:Geometry ;
+            :hasCoordinates "3,4" .
+
+
+###  http://www.w3id.org/citylights-graph#Road1_geo
+:Road1_geo rdf:type owl:NamedIndividual ,
+                    cg:Geometry .
+
+
+###  http://www.w3id.org/citylights-graph#Road2_geo
+:Road2_geo rdf:type owl:NamedIndividual ,
+                    cg:Geometry .
+
+
+###  http://www.w3id.org/citylights-graph#SPb_geo
+:SPb_geo rdf:type owl:NamedIndividual ,
+                  cg:Geometry ;
+         :hasCoordinates "1,2" .
+
+
 ###  http://www.w3id.org/citylights-graph#Saint-Petersburg
 :Saint-Petersburg rdf:type owl:NamedIndividual ,
                            OGD:FederalCity ;
+                  :hasGeometry :SPb_geo ;
                   :hasIlluminationInterval :Spb_I_01_01_2020 ,
                                            :Spb_I_01_03_2020 ,
                                            :Spb_I_01_06_2020 ,
                                            :Spb_I_01_09_2020 ,
-                                           :Spb_I_01_12_2020 .
+                                           :Spb_I_01_12_2020 ;
+                  :hasName "Санкт-Петербург" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_01_2020
-:Spb_E_01_01_2020 rdf:type owl:NamedIndividual ;
+:Spb_E_01_01_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-01-01T08:36:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_03_2020
-:Spb_E_01_03_2020 rdf:type owl:NamedIndividual ;
+:Spb_E_01_03_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-03-01T07:09:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_06_2020
-:Spb_E_01_06_2020 rdf:type owl:NamedIndividual ;
+:Spb_E_01_06_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-06-01T03:02:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_09_2020
-:Spb_E_01_09_2020 rdf:type owl:NamedIndividual ;
+:Spb_E_01_09_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-09-01T05:13:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_12_2020
-:Spb_E_01_12_2020 rdf:type owl:NamedIndividual ;
+:Spb_E_01_12_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-12-01T08:17:00+03:00" .
 
 
@@ -531,27 +573,32 @@ OGD:Locality rdf:type owl:Class ;
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_01_2020
-:Spb_S_01_01_2020 rdf:type owl:NamedIndividual ;
+:Spb_S_01_01_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-01-01T16:17:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_03_2020
-:Spb_S_01_03_2020 rdf:type owl:NamedIndividual ;
+:Spb_S_01_03_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-03-01T18:14:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_06_2020
-:Spb_S_01_06_2020 rdf:type owl:NamedIndividual ;
+:Spb_S_01_06_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-06-01T21:23:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_09_2020
-:Spb_S_01_09_2020 rdf:type owl:NamedIndividual ;
+:Spb_S_01_09_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-09-01T19:38:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_12_2020
-:Spb_S_01_12_2020 rdf:type owl:NamedIndividual ;
+:Spb_S_01_12_2020 rdf:type owl:NamedIndividual ,
+                           time:Instant ;
                   time:inXSDDateTime "2020-12-01T16:18:00+03:00" .
 
 
