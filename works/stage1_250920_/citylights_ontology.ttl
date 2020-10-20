@@ -27,9 +27,18 @@
          rdfs:range xsd:string .
 
 
+###  http://www.w3id.org/citylights-graph#areDomains
+:areDomains rdf:type owl:AnnotationProperty ;
+            rdfs:range xsd:string .
+
+
 ###  http://www.w3id.org/citylights-graph#notConvertable
 :notConvertable rdf:type owl:AnnotationProperty ;
                 rdfs:range xsd:boolean .
+
+
+###  http://www.w3id.org/citylights-graph#reverseProperty
+:reverseProperty rdf:type owl:AnnotationProperty .
 
 
 #################################################################
@@ -47,7 +56,7 @@ time:hasBeginning rdf:type owl:ObjectProperty ;
 time:hasDuration rdf:type owl:ObjectProperty ;
                  rdfs:domain time:ProperInterval ;
                  rdfs:range time:Duration ;
-                 rdfs:label "продолжительность освещения" .
+                 rdfs:label "продолжительность" .
 
 
 ###  http://www.w3.org/2006/time#hasEnd
@@ -57,17 +66,12 @@ time:hasEnd rdf:type owl:ObjectProperty ;
             rdfs:label "время окончания" .
 
 
-###  http://www.w3id.org/citylights-graph#hasGeneralTimetable
-:hasGeneralTimetable rdf:type owl:ObjectProperty ;
-                     rdfs:domain :City ;
-                     rdfs:range :Timetable ;
-                     rdfs:label "график светоосвещения" .
-
-
 ###  http://www.w3id.org/citylights-graph#hasGeometry
 :hasGeometry rdf:type owl:ObjectProperty ;
+             rdfs:domain :City ;
              rdfs:range cg:Geometry ;
-             rdfs:label "геометрия" .
+             rdfs:label "геометрия" ;
+             :areDomains "<http://www.opengis.net/citygml/transportation/2.0/Road>" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasIlluminationInterval
@@ -75,6 +79,21 @@ time:hasEnd rdf:type owl:ObjectProperty ;
                          rdfs:domain :City ;
                          rdfs:range time:ProperInterval ;
                          rdfs:label "интервал освещения" .
+
+
+###  http://www.w3id.org/citylights-graph#hasIlluminationTimetable
+:hasIlluminationTimetable rdf:type owl:ObjectProperty ;
+                          rdfs:domain :City ;
+                          rdfs:range :IlluminationTimetable ;
+                          rdfs:label "график светоосвещения" .
+
+
+###  http://www.w3id.org/citylights-graph#hasIlluminationType
+:hasIlluminationType rdf:type owl:ObjectProperty ;
+                     rdfs:domain :RoadIllumination ;
+                     rdfs:range :Lighting ;
+                     rdfs:label "тип освещения" ;
+                     :reverseProperty "true"^^xsd:boolean .
 
 
 ###  http://www.w3id.org/citylights-graph#hasLighting
@@ -91,13 +110,6 @@ time:hasEnd rdf:type owl:ObjectProperty ;
          rdfs:label "дорога" .
 
 
-###  http://www.w3id.org/citylights-graph#illuminationType
-:illuminationType rdf:type owl:ObjectProperty ;
-                  rdfs:domain :RoadIllumination ;
-                  rdfs:range :Lighting ;
-                  rdfs:label "тип освещения" .
-
-
 #################################################################
 #    Data properties
 #################################################################
@@ -106,8 +118,7 @@ time:hasEnd rdf:type owl:ObjectProperty ;
 time:inXSDDateTime rdf:type owl:DatatypeProperty ;
                    rdfs:domain time:Instant ;
                    rdfs:range xsd:dateTimeStamp ;
-                   rdfs:label "точное время" ;
-                   :ERDname "time" .
+                   rdfs:label "точное время" .
 
 
 ###  http://www.w3.org/2006/time#minutes
@@ -137,15 +148,22 @@ time:minutes rdf:type owl:DatatypeProperty ;
 :hasCoordinates rdf:type owl:DatatypeProperty ;
                 rdfs:domain cg:Geometry ;
                 rdfs:range xsd:string ;
-                rdfs:label "координаты" ;
-                :ERDname "coords" .
+                rdfs:label "координаты" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasDistanceBetween
 :hasDistanceBetween rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf :hasLightingProperty ;
+                    rdfs:domain :Lighting ;
                     rdfs:range xsd:int ;
                     rdfs:label "расстояние между" .
+
+
+###  http://www.w3id.org/citylights-graph#hasIlluminationAmount
+:hasIlluminationAmount rdf:type owl:DatatypeProperty ;
+                       rdfs:domain :RoadIllumination ;
+                       rdfs:range xsd:int ;
+                       rdfs:label "количество элементов освещения" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasLampType
@@ -158,24 +176,24 @@ time:minutes rdf:type owl:DatatypeProperty ;
 
 ###  http://www.w3id.org/citylights-graph#hasLightingProperty
 :hasLightingProperty rdf:type owl:DatatypeProperty ;
-                     rdfs:domain :Lighting ;
-                     rdfs:label "атрибут освещения" .
+                     rdfs:label "атрибут освещения" ;
+                     :notConvertable "true"^^xsd:boolean .
 
 
-###  http://www.w3id.org/citylights-graph#hasLinesCountMax
-:hasLinesCountMax rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf :hasRoadsProperty ;
-                  rdfs:domain <http://www.opengis.net/citygml/transportation/2.0/Road> ;
-                  rdfs:range xsd:int ;
-                  rdfs:label "максимальное количество полос движения" .
+###  http://www.w3id.org/citylights-graph#hasLinesAmountMax
+:hasLinesAmountMax rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :hasRoadsProperty ;
+                   rdfs:domain <http://www.opengis.net/citygml/transportation/2.0/Road> ;
+                   rdfs:range xsd:int ;
+                   rdfs:label "максимальное количество полос движения" .
 
 
-###  http://www.w3id.org/citylights-graph#hasLinesCountMin
-:hasLinesCountMin rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf :hasRoadsProperty ;
-                  rdfs:domain <http://www.opengis.net/citygml/transportation/2.0/Road> ;
-                  rdfs:range xsd:int ;
-                  rdfs:label "минимальное количество полос движения" .
+###  http://www.w3id.org/citylights-graph#hasLinesAmountMin
+:hasLinesAmountMin rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf :hasRoadsProperty ;
+                   rdfs:domain <http://www.opengis.net/citygml/transportation/2.0/Road> ;
+                   rdfs:range xsd:int ;
+                   rdfs:label "минимальное количество полос движения" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasMinimalIllumination
@@ -188,12 +206,15 @@ time:minutes rdf:type owl:DatatypeProperty ;
 
 ###  http://www.w3id.org/citylights-graph#hasName
 :hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :City ;
+         rdfs:range xsd:string ;
          rdfs:label "название города" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasPower
 :hasPower rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf :hasLightingProperty ;
+          rdfs:domain :Lighting ;
           rdfs:range xsd:integer ;
           rdfs:label "мощность" .
 
@@ -201,14 +222,15 @@ time:minutes rdf:type owl:DatatypeProperty ;
 ###  http://www.w3id.org/citylights-graph#hasPowerPerKilometer
 :hasPowerPerKilometer rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf :hasLightingProperty ;
+                      rdfs:domain :Lighting ;
                       rdfs:range xsd:int ;
                       rdfs:label "мощность на 1 км" .
 
 
 ###  http://www.w3id.org/citylights-graph#hasRoadsProperty
 :hasRoadsProperty rdf:type owl:DatatypeProperty ;
-                  rdfs:domain <http://www.opengis.net/citygml/transportation/2.0/Road> ;
-                  rdfs:label "атрибут дороги" .
+                  rdfs:label "атрибут дороги" ;
+                  :notConvertable "true"^^xsd:boolean .
 
 
 ###  http://www.w3id.org/citylights-graph#hasStandartTravelSpeedMax
@@ -227,13 +249,6 @@ time:minutes rdf:type owl:DatatypeProperty ;
                            rdfs:label "минимальная расчётная скорость движения" .
 
 
-###  http://www.w3id.org/citylights-graph#illuminationAmount
-:illuminationAmount rdf:type owl:DatatypeProperty ;
-                    rdfs:domain :RoadIllumination ;
-                    rdfs:range xsd:int ;
-                    rdfs:label "количество элементов освещения" .
-
-
 ###  http://www.w3id.org/citylights-graph#isProvidedWithIllumination
 :isProvidedWithIllumination rdf:type owl:DatatypeProperty ;
                             rdfs:subPropertyOf :hasRoadsProperty ;
@@ -248,7 +263,9 @@ time:minutes rdf:type owl:DatatypeProperty ;
 
 ###  http://www.opengis.net/citygml/transportation/2.0/Road
 <http://www.opengis.net/citygml/transportation/2.0/Road> rdf:type owl:Class ;
-                                                         rdfs:label "Дорога" .
+                                                         rdfs:label "Road"@en ,
+                                                                    "Дорога"@ru ;
+                                                         :ERDname "road" .
 
 
 ###  http://www.w3.org/2006/time#Duration
@@ -262,8 +279,7 @@ time:Instant rdf:type owl:Class ;
 
 
 ###  http://www.w3.org/2006/time#ProperInterval
-time:ProperInterval rdf:type owl:Class ;
-                    :ERDname "LightingInterval" .
+time:ProperInterval rdf:type owl:Class .
 
 
 ###  http://www.w3id.org/citygraph-core#Document
@@ -284,10 +300,16 @@ cg:Geometry rdf:type owl:Class ;
       rdfs:label "Город" .
 
 
+###  http://www.w3id.org/citylights-graph#IlluminationTimetable
+:IlluminationTimetable rdf:type owl:Class ;
+                       rdfs:subClassOf cg:Document ;
+                       rdfs:comment "Предлагается сделать этот класс, подклассом класса \"Документ\" из основной онтологии." ;
+                       rdfs:label "График освещения" .
+
+
 ###  http://www.w3id.org/citylights-graph#Lighting
 :Lighting rdf:type owl:Class ;
-          rdfs:label "Элемент освещения" ;
-          :ERDname "LampLight" .
+          rdfs:label "Элемент освещения" .
 
 
 ###  http://www.w3id.org/citylights-graph#RoadIllumination
@@ -334,7 +356,7 @@ cg:Geometry rdf:type owl:Class ;
 ###  http://www.w3id.org/citylights-graph#Road_B1
 :Road_B1 rdf:type owl:Class ;
          rdfs:subClassOf :Road_B ;
-         rdfs:label "Дорога класса Б2" .
+         rdfs:label "Дорога класса Б1" .
 
 
 ###  http://www.w3id.org/citylights-graph#Road_B2
@@ -367,12 +389,6 @@ cg:Geometry rdf:type owl:Class ;
          rdfs:label "Дорога класса В3" .
 
 
-###  http://www.w3id.org/citylights-graph#Timetable
-:Timetable rdf:type owl:Class ;
-           rdfs:subClassOf cg:Document ;
-           rdfs:label "График освещения" .
-
-
 ###  http://www.w3id.org/opengovdata#FederalCity
 OGD:FederalCity rdf:type owl:Class ;
                 rdfs:subClassOf :City ;
@@ -392,10 +408,8 @@ OGD:Locality rdf:type owl:Class ;
 ###  http://www.w3id.org/citylights-graph#Moscow
 :Moscow rdf:type owl:NamedIndividual ,
                  OGD:FederalCity ;
-        :hasGeometry :Moscow_geo ;
         :hasIlluminationInterval :Moscow_I_01_01 ;
-        :hasRoad :Moscow_Road_1 ;
-        :hasName "Москва" .
+        :hasRoad :Moscow_Road_1 .
 
 
 ###  http://www.w3id.org/citylights-graph#Moscow_E_01_01
@@ -421,15 +435,14 @@ OGD:Locality rdf:type owl:Class ;
 ###  http://www.w3id.org/citylights-graph#Moscow_Road_1
 :Moscow_Road_1 rdf:type owl:NamedIndividual ,
                         :Road_A1 ;
-               :hasGeometry :Road1_geo ;
                :hasLighting :Moscow_Road_1_Lighting .
 
 
 ###  http://www.w3id.org/citylights-graph#Moscow_Road_1_Lighting
 :Moscow_Road_1_Lighting rdf:type owl:NamedIndividual ,
                                  :RoadIllumination ;
-                        :illuminationType <http://www.w3id.org/citylights-graph#1-30-150-001-9> ;
-                        :illuminationAmount 100 .
+                        :hasIlluminationType <http://www.w3id.org/citylights-graph#1-30-150-001-9> ;
+                        :hasIlluminationAmount 100 .
 
 
 ###  http://www.w3id.org/citylights-graph#Moscow_S_01_01
@@ -438,67 +451,38 @@ OGD:Locality rdf:type owl:Class ;
                 time:inXSDDateTime "2020-01-01T16:15:00+03:00" .
 
 
-###  http://www.w3id.org/citylights-graph#Moscow_geo
-:Moscow_geo rdf:type owl:NamedIndividual ,
-                     cg:Geometry ;
-            :hasCoordinates "3,4" .
-
-
-###  http://www.w3id.org/citylights-graph#Road1_geo
-:Road1_geo rdf:type owl:NamedIndividual ,
-                    cg:Geometry .
-
-
-###  http://www.w3id.org/citylights-graph#Road2_geo
-:Road2_geo rdf:type owl:NamedIndividual ,
-                    cg:Geometry .
-
-
-###  http://www.w3id.org/citylights-graph#SPb_geo
-:SPb_geo rdf:type owl:NamedIndividual ,
-                  cg:Geometry ;
-         :hasCoordinates "1,2" .
-
-
 ###  http://www.w3id.org/citylights-graph#Saint-Petersburg
 :Saint-Petersburg rdf:type owl:NamedIndividual ,
                            OGD:FederalCity ;
-                  :hasGeometry :SPb_geo ;
                   :hasIlluminationInterval :Spb_I_01_01_2020 ,
                                            :Spb_I_01_03_2020 ,
                                            :Spb_I_01_06_2020 ,
                                            :Spb_I_01_09_2020 ,
-                                           :Spb_I_01_12_2020 ;
-                  :hasName "Санкт-Петербург" .
+                                           :Spb_I_01_12_2020 .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_01_2020
-:Spb_E_01_01_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_E_01_01_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-01-01T08:36:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_03_2020
-:Spb_E_01_03_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_E_01_03_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-03-01T07:09:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_06_2020
-:Spb_E_01_06_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_E_01_06_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-06-01T03:02:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_09_2020
-:Spb_E_01_09_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_E_01_09_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-09-01T05:13:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_E_01_12_2020
-:Spb_E_01_12_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_E_01_12_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-12-01T08:17:00+03:00" .
 
 
@@ -573,32 +557,27 @@ OGD:Locality rdf:type owl:Class ;
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_01_2020
-:Spb_S_01_01_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_S_01_01_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-01-01T16:17:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_03_2020
-:Spb_S_01_03_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_S_01_03_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-03-01T18:14:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_06_2020
-:Spb_S_01_06_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_S_01_06_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-06-01T21:23:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_09_2020
-:Spb_S_01_09_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_S_01_09_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-09-01T19:38:00+03:00" .
 
 
 ###  http://www.w3id.org/citylights-graph#Spb_S_01_12_2020
-:Spb_S_01_12_2020 rdf:type owl:NamedIndividual ,
-                           time:Instant ;
+:Spb_S_01_12_2020 rdf:type owl:NamedIndividual ;
                   time:inXSDDateTime "2020-12-01T16:18:00+03:00" .
 
 
@@ -741,7 +720,7 @@ OGD:Locality rdf:type owl:Class ;
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                              <http://www.w3.org/2003/11/swrl#argument2> 8
                                                                            ] ;
@@ -753,7 +732,7 @@ OGD:Locality rdf:type owl:Class ;
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                  ] ;
@@ -791,39 +770,39 @@ OGD:Locality rdf:type owl:Class ;
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 60
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 2
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                              <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 6
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 4
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 2
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 2
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                             ] ;
                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 4
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 2
                                                                                                                        ] ;
                                                                                                              rdf:rest rdf:nil
                                                                                                            ]
@@ -854,33 +833,33 @@ OGD:Locality rdf:type owl:Class ;
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 60
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 2
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                              <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 2
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 4
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 3
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 4
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 3
                                                                                                             ] ;
                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
@@ -911,39 +890,39 @@ OGD:Locality rdf:type owl:Class ;
                                          ] ;
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> 60
+                                                       <http://www.w3.org/2003/11/swrl#argument2> 2
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 10
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> 60
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> 10
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 2
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 4
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 3
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 4
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 3
                                                                                                             ] ;
                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
@@ -980,21 +959,21 @@ OGD:Locality rdf:type owl:Class ;
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 8
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 80
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> 80
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> 7
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 7
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 8
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
@@ -1004,7 +983,7 @@ OGD:Locality rdf:type owl:Class ;
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                             ] ;
@@ -1037,27 +1016,27 @@ OGD:Locality rdf:type owl:Class ;
                                          ] ;
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> 8
+                                                       <http://www.w3.org/2003/11/swrl#argument2> 7
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 7
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 4
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> 4
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> 90
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 90
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 8
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
@@ -1067,7 +1046,7 @@ OGD:Locality rdf:type owl:Class ;
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                             ] ;
@@ -1112,33 +1091,33 @@ OGD:Locality rdf:type owl:Class ;
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> 5
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> 4
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 3
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 5
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 20
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 3
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 4
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                             ] ;
                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 6
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 20
                                                                                                                        ] ;
                                                                                                              rdf:rest rdf:nil
                                                                                                            ]
@@ -1163,45 +1142,45 @@ OGD:Locality rdf:type owl:Class ;
                                          ] ;
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> 5
+                                                       <http://www.w3.org/2003/11/swrl#argument2> 4
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 60
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 5
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> 3
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 70
+                                                                                        <http://www.w3.org/2003/11/swrl#argument2> 3
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 20
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 4
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 70
                                                                                                             ] ;
                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 6
+                                                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 20
                                                                                                                        ] ;
                                                                                                              rdf:rest rdf:nil
                                                                                                            ]
@@ -1226,43 +1205,43 @@ OGD:Locality rdf:type owl:Class ;
                                          ] ;
    <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMin ;
                                                        <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                       <http://www.w3.org/2003/11/swrl#argument2> 15
+                                                       <http://www.w3.org/2003/11/swrl#argument2> 3
                                                      ] ;
                                            rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                       rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasMinimalIllumination ;
                                                                   <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                  <http://www.w3.org/2003/11/swrl#argument2> 5
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> 15
                                                                 ] ;
                                                       rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                  rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
+                                                                             <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMax ;
                                                                              <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                             <http://www.w3.org/2003/11/swrl#argument2> 60
+                                                                             <http://www.w3.org/2003/11/swrl#argument2> 5
                                                                            ] ;
                                                                  rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                             rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
+                                                                                        <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMax ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                                         <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                                       ] ;
                                                                             rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                        rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
+                                                                                                   <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasStandartTravelSpeedMin ;
                                                                                                    <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 2
+                                                                                                   <http://www.w3.org/2003/11/swrl#argument2> 60
                                                                                                  ] ;
                                                                                        rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                   rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMin ;
+                                                                                                              <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasBandwidthMin ;
                                                                                                               <http://www.w3.org/2003/11/swrl#argument1> :x ;
-                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 3
+                                                                                                              <http://www.w3.org/2003/11/swrl#argument2> 2
                                                                                                             ] ;
                                                                                                   rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
                                                                                                              rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#DatavaluedPropertyAtom> ;
-                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesCountMax ;
+                                                                                                                         <http://www.w3.org/2003/11/swrl#propertyPredicate> :hasLinesAmountMax ;
                                                                                                                          <http://www.w3.org/2003/11/swrl#argument1> :x ;
                                                                                                                          <http://www.w3.org/2003/11/swrl#argument2> 6
                                                                                                                        ] ;
