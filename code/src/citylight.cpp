@@ -1,7 +1,6 @@
-﻿#include <iostream>
+#include <iostream>
 #include <string>
 #include <fstream>
-#include <Windows.h>
 #include <vector>
 #include <stdlib.h>
 #include <map>
@@ -16,17 +15,6 @@ map <string, string> tables;
 
 vector <string> tables_done;
 
-int line_count = 1;
-
-
-class table
-{
-public:
-    string name_in_ontology;
-    string name_table;
-    boolean category;
-    vector <string> atributs;
-};
 
 int char_pos(string line, char char_needed, int order)
 {
